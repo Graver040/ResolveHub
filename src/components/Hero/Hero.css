@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+.hero {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.hero-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  max-width: 500px;
+  color: #6b7280;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+/* BUTTONS */
+
+.btn-primary {
+  background-color: #86591d;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #5a3526;
+  height: 150%;
+  width: 150%;
+  
+  
+}
+
+.btn-secondary {
+  background-color: rgb(211, 171, 171);
+  color: #374151;
+  padding: 14px 28px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  background-color: #e3e9f0;
+  height: 150%;
+  width: 150%;
+}
+
+/* IMAGE */
+
+.hero-image img {
+  width: 500px;
+  max-width: 100%;
+}
+
+/* 📱 RESPONSIVE */
+
+@media (max-width: 900px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text p {
+    margin: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+.hero-text h1 {
+  font-size: 69px;
+  color: #4c3228
+}
+
+.hero-text h2{
+  font-size: 45px;
+}

@@ -1,16 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  --bg-dark: #050505;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --accent-pink: #ff0080;
+  --accent-pink-glow: rgba(255, 0, 128, 0.3);
+  --text-muted: #94a3b8;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-  background-color: #ffffff;
-  color: #111827;
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 40%);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 0, 128, 0.3);
+  background: rgba(20, 20, 20, 0.6);
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.1);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #ff0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-pink {
+  background: linear-gradient(135deg, #ff0080 0%, #7928ca 100%);
+}
+
+.pink-glow {
+  box-shadow: 0 0 20px var(--accent-pink-glow);
+}
+
+.pink-glow-text {
+  text-shadow: 0 0 10px var(--accent-pink-glow);
+}
+
+/* Animation helpers */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-pink);
 }

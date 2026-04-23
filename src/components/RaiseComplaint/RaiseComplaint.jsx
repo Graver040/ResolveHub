@@ -1,8 +1,8 @@
-import Sidebar from "../Dashboard/Sidebar";
-import "../Dashboard/Dashboard.css";
-import "./RaiseComplaint.css";
-import { useState } from "react";
-import api from "../../services/api";
+import React, { useState } from 'react';
+import api from '../../services/api';
+import Sidebar from '../Dashboard/Sidebar';
+import PageHeader from '../PageHeader';
+import { MapPin, Image as ImageIcon, Send } from 'lucide-react';
 
 const RaiseComplaint = () => {
     const [title, setTitle] = useState("");
@@ -28,56 +28,126 @@ const RaiseComplaint = () => {
     };
 
     return (
-        <div className="dashboard-layout">
-            <header className="dashboard-header">
-                <div className="profile-icon">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-            </header>
-            
-            <div className="dashboard-body">
-                <Sidebar />
+        <div className="flex h-screen text-white font-sans relative overflow-hidden" style={{ backgroundColor: '#050505' }}>
+            {/* Background Glows */}
+            <div className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-                <main className="dashboard-main">
-                    <div className="form-container">
-                        <h2 className="form-title">Raise a New Complaint</h2>
-                        <form onSubmit={handleSubmit} className="complaint-form">
-                            <div className="form-group">
-                                <label>Complaint Title</label>
-                                <input type="text" placeholder="E.g., Broken Streetlight" value={title} onChange={e=>setTitle(e.target.value)} required />
-                            </div>
-                            
-                            <div className="form-group">
-                                <label>Category</label>
-                                <select required value={category} onChange={e=>setCategory(e.target.value)}>
-                                    <option value="">Select Category</option>
-                                    <option value="Roads">Roads & Transport</option>
-                                    <option value="Water">Water Supply</option>
-                                    <option value="Sanitation">Sanitation & Garbage</option>
-                                    <option value="Electrical">Electrical & Streetlights</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
+            <Sidebar />
 
-                            <div className="form-group">
-                                <label>Description</label>
-                                <textarea rows="4" placeholder="Describe the issue in detail" value={description} onChange={e=>setDescription(e.target.value)} required></textarea>
-                            </div>
+            <div className="flex-1 overflow-x-hidden overflow-y-auto relative z-10 w-full">
+                <main className="p-12 max-w-[1200px] mx-auto min-h-screen" style={{ padding: '48px' }}>
+                    <div className="animate-in fade-in duration-500 text-white pb-12" style={{ paddingBottom: '48px' }}>
+                        
+                        <div style={{ marginBottom: '48px' }}>
+                            <PageHeader 
+                              title="File a Complaint"
+                              subtitle="Provide details about your issue so we can help resolve it quickly."
+                              showSearch={false}
+                            />
+                        </div>
 
-                            <div className="form-group">
-                                <label>Location</label>
-                                <input type="text" placeholder="Enter landmark or address" required />
-                            </div>
+                        <div className="backdrop-blur-xl rounded-[32px] p-10 shadow-xl border relative overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.05)', padding: '40px' }}>
+                            <form onSubmit={handleSubmit} className="relative z-10 flex flex-col" style={{ gap: '32px' }}>
+                                
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
+                                    <div className="flex flex-col" style={{ gap: '12px' }}>
+                                        <label className="block text-sm font-bold text-white/70 uppercase tracking-wide">Complaint Title</label>
+                                        <input 
+                                            type="text" 
+                                            placeholder="E.g., Broken Streetlight" 
+                                            value={title} 
+                                            onChange={e=>setTitle(e.target.value)} 
+                                            required 
+                                            className="w-full border rounded-2xl text-white outline-none transition-all font-medium"
+                                            style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1)', padding: '16px 24px' }}
+                                        />
+                                    </div>
+                                    
+                                    <div className="flex flex-col" style={{ gap: '12px' }}>
+                                        <label className="block text-sm font-bold text-white/70 uppercase tracking-wide">Category</label>
+                                        <select 
+                                            required 
+                                            value={category} 
+                                            onChange={e=>setCategory(e.target.value)}
+                                            className="w-full border rounded-2xl text-white outline-none transition-all font-medium appearance-none"
+                                            style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1)', padding: '16px 24px' }}
+                                        >
+                                            <option value="" className="bg-[#0f1115] text-white">Select Category</option>
+                                            <option value="Roads" className="bg-[#0f1115] text-white">Roads & Transport</option>
+                                            <option value="Water" className="bg-[#0f1115] text-white">Water Supply</option>
+                                            <option value="Sanitation" className="bg-[#0f1115] text-white">Sanitation & Garbage</option>
+                                            <option value="Electrical" className="bg-[#0f1115] text-white">Electrical & Streetlights</option>
+                                            <option value="Other" className="bg-[#0f1115] text-white">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <div className="form-group">
-                                <label>Upload Image (Optional)</label>
-                                <input type="file" accept="image/*" />
-                            </div>
+                                <div className="flex flex-col" style={{ gap: '12px' }}>
+                                    <label className="block text-sm font-bold text-white/70 uppercase tracking-wide">Description</label>
+                                    <textarea 
+                                        rows="5" 
+                                        placeholder="Describe the issue in detail..." 
+                                        value={description} 
+                                        onChange={e=>setDescription(e.target.value)} 
+                                        required
+                                        className="w-full border rounded-2xl text-white outline-none transition-all font-medium resize-none"
+                                        style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1)', padding: '16px 24px' }}
+                                    ></textarea>
+                                </div>
 
-                            <button type="submit" className="submit-btn" disabled={loading}>
-                                {loading ? 'Submitting...' : 'Submit Complaint'}
-                            </button>
-                        </form>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
+                                    <div className="flex flex-col" style={{ gap: '12px' }}>
+                                        <label className="block text-sm font-bold text-white/70 uppercase tracking-wide">Location</label>
+                                        <div className="relative">
+                                            <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                                            <input 
+                                                type="text" 
+                                                placeholder="Enter landmark or address" 
+                                                required 
+                                                className="w-full border rounded-2xl text-white outline-none transition-all font-medium"
+                                                style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1)', padding: '16px 24px 16px 56px' }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col" style={{ gap: '12px' }}>
+                                        <label className="block text-sm font-bold text-white/70 uppercase tracking-wide">Upload Image <span className="opacity-50">(Optional)</span></label>
+                                        <div className="relative">
+                                            <ImageIcon className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                                            <input 
+                                                type="file" 
+                                                accept="image/*" 
+                                                className="w-full border rounded-2xl text-white outline-none transition-all font-medium cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-pink-500 file:text-white"
+                                                style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.1)', padding: '12px 24px 12px 56px' }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style={{ marginTop: '24px' }}>
+                                    <button 
+                                        type="submit" 
+                                        disabled={loading}
+                                        className="w-full md:w-auto px-10 py-5 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 text-white font-bold rounded-2xl shadow-[0_10px_30px_rgba(236,72,153,0.3)] transition-all disabled:opacity-50 flex items-center justify-center gap-3 text-lg"
+                                        style={{ padding: '20px 40px', gap: '12px' }}
+                                    >
+                                        {loading ? (
+                                            <div className="flex items-center" style={{ gap: '8px' }}>
+                                                <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                                                <span>Submitting...</span>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <span>Submit Complaint</span>
+                                                <Send className="w-5 h-5" />
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
                 </main>
             </div>

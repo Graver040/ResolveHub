@@ -2,17 +2,17 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   FileText, 
-  UserPlus, 
-  Users, 
-  BarChart2, 
+  CheckCircle2, 
+  User, 
+  Settings, 
   LogOut,
   ArrowLeftRight
 } from 'lucide-react';
-import logoImg from "../../../assets/images/logo.png";
+import logoImg from "../../assets/images/logo.png";
 
-const Sidebar = () => {
+const OfficerSidebar = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('userInfo')) || { name: 'Admin', email: 'admin@system.com' };
+  const user = JSON.parse(localStorage.getItem('userInfo')) || { name: 'Officer', role: 'officer' };
 
   const handleLogout = () => {
     localStorage.removeItem('userInfo');
@@ -20,11 +20,8 @@ const Sidebar = () => {
   };
 
   const navItems = [
-    { label: 'Dashboard Overview', path: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'Manage Complaints', path: '/admin/complaints', icon: FileText },
-    { label: 'Assign Complaints', path: '/admin/assign', icon: UserPlus },
-    { label: 'Users', path: '/admin/users', icon: Users },
-    { label: 'Analytics', path: '/admin/analytics', icon: BarChart2 },
+    { label: 'My Complaints', path: '/officer/complaints', icon: FileText },
+    { label: 'Resolved Cases', path: '/officer/resolved', icon: CheckCircle2 },
   ];
 
   return (
@@ -35,7 +32,7 @@ const Sidebar = () => {
         <img src={logoImg} alt="ResolveHub Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
         <div>
           <h1 className="text-xl font-black tracking-tight">ResolveHub</h1>
-          <p className="text-xs text-white/30 font-bold tracking-widest uppercase">Admin Portal</p>
+          <p className="text-xs text-white/30 font-bold tracking-widest uppercase">Officer Portal</p>
         </div>
       </div>
 
@@ -49,7 +46,7 @@ const Sidebar = () => {
               className={({ isActive }) => 
                 `flex items-center font-bold transition-all duration-300 rounded-xl ${
                   isActive
-                    ? 'bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/20 text-pink-500 shadow-inner' 
+                    ? 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 text-blue-400 shadow-inner' 
                     : 'text-white/40 hover:bg-white/5 hover:text-white border border-transparent'
                 }`
               }
@@ -76,26 +73,28 @@ const Sidebar = () => {
       {/* User Profile Card */}
       <div className="flex flex-col" style={{ padding: '0 16px', marginTop: 'auto', gap: '16px' }}>
         <div className="flex items-center rounded-2xl transition-colors cursor-pointer border hover:bg-white/5" style={{ backgroundColor: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.05)', padding: '16px', gap: '16px' }}>
-          <div className="rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-black shadow-[0_0_15px_rgba(236,72,153,0.3)]" style={{ width: '40px', height: '40px' }}>
+          <div className="rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-black shadow-[0_0_15px_rgba(59,130,246,0.3)]" style={{ width: '40px', height: '40px' }}>
             {user.name.substring(0, 2).toUpperCase()}
           </div>
           <div className="overflow-hidden">
             <h4 className="text-sm font-bold truncate">{user.name}</h4>
-            <p className="text-xs text-white/40 font-medium truncate">{user.email}</p>
+            <p className="text-xs text-white/40 font-medium truncate">Complaint Officer</p>
           </div>
         </div>
 
-        <button
-          onClick={() => navigate('/officer/dashboard')}
-          className="flex items-center justify-center font-bold bg-white/5 hover:bg-white/10 text-white transition-all rounded-2xl border border-white/10"
-          style={{ padding: '16px', gap: '12px' }}
-        >
-          <ArrowLeftRight className="w-5 h-5 text-pink-500" />
-          <span className="text-sm">Switch to Officer</span>
-        </button>
+        {user.role === 'admin' && (
+          <button
+            onClick={() => navigate('/admin/dashboard')}
+            className="flex items-center justify-center font-bold bg-white/5 hover:bg-white/10 text-white transition-all rounded-2xl border border-white/10"
+            style={{ padding: '16px', gap: '12px' }}
+          >
+            <ArrowLeftRight className="w-5 h-5 text-blue-400" />
+            <span className="text-sm">Switch to Admin Portal</span>
+          </button>
+        )}
       </div>
     </aside>
   );
 };
 
-export default Sidebar;
+export default OfficerSidebar;

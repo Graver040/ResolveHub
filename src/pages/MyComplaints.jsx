@@ -1,9 +1,8 @@
 import Sidebar from '../components/Dashboard/Sidebar';
-import TopCards from '../components/Dashboard/TopCards';
 import ComplaintList from '../components/Dashboard/ComplaintList';
 import PageHeader from '../components/PageHeader';
 
-const UserDashboard = () => {
+const MyComplaints = () => {
     return (
         <div className="flex h-screen text-white font-sans relative overflow-hidden" style={{ backgroundColor: '#050505' }}>
             {/* Background Glows */}
@@ -18,16 +17,12 @@ const UserDashboard = () => {
                         
                         <div style={{ marginBottom: '48px' }}>
                             <PageHeader 
-                              title="User Dashboard"
-                              subtitle="Welcome back! Manage your complaints and track their status."
+                              title="My Complaints"
+                              subtitle="Review and track the progress of your submitted complaints."
                               searchPlaceholder="Search your complaints..."
                             />
                         </div>
 
-                        <div style={{ marginBottom: '48px' }}>
-                           <TopCards />
-                        </div>
-                        
                         <div style={{ marginBottom: '40px' }}>
                            <ComplaintList />
                         </div>
@@ -38,4 +33,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default MyComplaints;

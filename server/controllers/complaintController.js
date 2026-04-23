@@ -34,7 +34,7 @@ const getComplaints = async (req, res) => {
 // @access  Private (usually citizen)
 const createComplaint = async (req, res) => {
   try {
-    const { title, description, category } = req.body;
+    const { title, description, category, priority } = req.body;
     if (!title || !description || !category) {
       return res.status(400).json({ message: 'Please add all fields' });
     }
@@ -43,6 +43,7 @@ const createComplaint = async (req, res) => {
       title,
       description,
       category,
+      priority: priority || 'Medium',
       citizen: req.user.id
     });
 
@@ -57,7 +58,7 @@ const createComplaint = async (req, res) => {
 // @access  Private (Admin or Officer)
 const updateComplaint = async (req, res) => {
   try {
-    const { status, department, assignedOfficer } = req.body;
+    const { status, department, assignedOfficer, priority } = req.body;
     const complaint = await Complaint.findById(req.params.id);
 
     if (!complaint) {
@@ -72,6 +73,7 @@ const updateComplaint = async (req, res) => {
     complaint.status = status || complaint.status;
     if (department !== undefined) complaint.department = department;
     if (assignedOfficer !== undefined) complaint.assignedOfficer = assignedOfficer;
+    if (priority !== undefined) complaint.priority = priority;
 
     const updatedComplaint = await complaint.save();
     

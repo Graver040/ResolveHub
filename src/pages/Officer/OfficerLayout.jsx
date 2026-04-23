@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import OfficerSidebar from './OfficerSidebar';
+import { Search, Bell, User } from 'lucide-react';
 
-const AdminLayout = () => {
+const OfficerLayout = () => {
   return (
     <div className="flex h-screen text-white font-sans relative overflow-hidden" style={{ backgroundColor: '#050505' }}>
       
@@ -10,7 +11,7 @@ const AdminLayout = () => {
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Sidebar Navigation */}
-      <Sidebar />
+      <OfficerSidebar />
 
       {/* Main Content Area */}
       <div className="flex-1 overflow-x-hidden overflow-y-auto relative z-10 w-full">
@@ -22,4 +23,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default OfficerLayout;

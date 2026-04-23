@@ -70,4 +70,33 @@ const getOfficersByDepartment = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, updateUser, deleteUser, getOfficersByDepartment };
+// @desc    Get all officers with their active task counts
+// @route   GET /api/users/officers/all
+// @access  Private/Admin
+const getAllOfficersWithTaskCount = async (req, res) => {
+  try {
+    const Complaint = require('../models/Complaint');
+    const User = require('../models/User');
+
+    const officers = await User.find({ role: { $in: ['officer', 'admin']} })
+      .select('-password')
+      .populate('department', 'name')
+      .lean();
+
+    // Map through officers and add count of unresolved complaints
+    const officersWithTasks = await Promise.all(officers.map(async (officer) => {
+      const activeTasks = await Complaint.countDocuments({
+        assignedOfficer: officer._id,
+        status: { $in: ['In Progress', 'Pending'] }
+      });
+      return { ...officer, activeTasks };
+    }));
+
+    res.json(officersWithTasks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { getUsers, updateUser, deleteUser, getOfficersByDepartment, getAllOfficersWithTaskCount };

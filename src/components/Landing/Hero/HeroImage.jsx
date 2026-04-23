@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ClipboardCheck, Search } from 'lucide-react';
-import heroHands from '../../../assets/images/hero_hands.png';
+import heroImg from '../../../assets/images/hero.jpeg';
 
 const HeroImage = () => {
   return (
@@ -17,7 +17,7 @@ const HeroImage = () => {
         className="relative z-10 w-[450px] h-[450px] rounded-[40px] overflow-hidden border border-white/10 glass shadow-2xl"
       >
         <img 
-          src={heroHands} 
+          src={heroImg} 
           alt="Hands reaching" 
           className="w-full h-full object-cover rotate-90 scale-125" 
         />

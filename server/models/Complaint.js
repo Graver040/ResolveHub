@@ -11,23 +11,23 @@ const complaintSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   category: { type: String, required: true },
-  status: { 
-    type: String, 
-    enum: ['Pending', 'In Progress', 'Resolved'], 
-    default: 'Pending' 
+  status: {
+    type: String,
+    enum: ['Pending', 'In Progress', 'Resolved'],
+    default: 'Pending'
   },
   priority: {
     type: String,
     enum: ['Low', 'Medium', 'High'],
     default: 'Medium'
   },
-  citizen: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
-    required: true 
+  citizen: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  department: { 
-    type: mongoose.Schema.Types.ObjectId, 
+  department: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Department',
     default: null
   },
@@ -43,15 +43,14 @@ const complaintSchema = new mongoose.Schema({
   updates: [updateSchema]
 }, { timestamps: true });
 
-// Pre-save hook to generate complaintId if it doesn't exist
-complaintSchema.pre('save', function(next) {
+complaintSchema.pre('save', function (next) {
   if (!this.complaintId) {
-    // Generate an ID like CMP-8273
+
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     this.complaintId = `CMP-${randomNum}`;
   }
   if (!this.dueDate) {
-    // Default due date is 7 days from creation
+
     const sevenDays = 7 * 24 * 60 * 60 * 1000;
     this.dueDate = new Date(Date.now() + sevenDays);
   }

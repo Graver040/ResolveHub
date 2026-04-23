@@ -2,6 +2,8 @@ import { useEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import './ScrollReveal.css';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollReveal = ({
@@ -14,6 +16,7 @@ const ScrollReveal = ({
   containerClassName = '',
   textClassName = '',
   rotationEnd = 'bottom bottom',
+  wordAnimationStart = 'top bottom-=20%',
   wordAnimationEnd = 'bottom bottom'
 }) => {
   const containerRef = useRef(null);
@@ -23,7 +26,7 @@ const ScrollReveal = ({
     return text.split(/(\s+)/).map((word, index) => {
       if (word.match(/^\s+$/)) return word;
       return (
-        <span className="inline-block word" key={index}>
+        <span className="word" key={index}>
           {word}
         </span>
       );
@@ -64,7 +67,7 @@ const ScrollReveal = ({
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: 'top bottom-=20%',
+          start: wordAnimationStart,
           end: wordAnimationEnd,
           scrub: true
         }
@@ -82,7 +85,7 @@ const ScrollReveal = ({
           scrollTrigger: {
             trigger: el,
             scroller,
-            start: 'top bottom-=20%',
+            start: wordAnimationStart,
             end: wordAnimationEnd,
             scrub: true
           }
@@ -93,11 +96,11 @@ const ScrollReveal = ({
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
+  }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationStart, wordAnimationEnd, blurStrength]);
 
   return (
-    <h2 ref={containerRef} className={`my-5 ${containerClassName}`}>
-      <p className={`text-[clamp(1.6rem,4vw,3rem)] leading-normal font-semibold ${textClassName}`}>{splitText}</p>
+    <h2 ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
+      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
     </h2>
   );
 };

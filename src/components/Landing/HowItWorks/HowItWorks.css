@@ -1,0 +1,57 @@
+.how {
+  background: #e6d9d9;
+  padding: 140px 20px;
+  text-align: center;
+  font-size: 40px;
+}
+
+/* TITLE */
+
+.how-title {
+  margin-bottom: 100px;
+}
+
+.how-title-text {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+/* LAYOUT */
+
+.how-container {
+  max-width: 1100px;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+
+.how-card {
+  width: 300px;
+}
+
+/* STEP NUMBER */
+
+.step-number-text {
+  font-size: 42px;
+  font-weight: 800;
+}
+
+/* STEP TITLE */
+
+.step-title-text {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+/* DESCRIPTION */
+
+.step-desc-text {
+  font-size: 16px;
+  line-height: 1.6;
+}

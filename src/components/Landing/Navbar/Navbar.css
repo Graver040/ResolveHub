@@ -1,0 +1,61 @@
+/* OUTER WRAPPER (for spacing from top) */
+.navbar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* MAIN NAVBAR */
+.navbar {
+  width: 90%;
+  max-width: 1200px;
+
+  background: #e5e5e5;
+  border: 2px solid #1f1f1f;
+
+  border-radius: 40px;
+
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+/* LOGO */
+.logo {
+  font-family: cursive;
+  font-size: 20px;
+}
+
+/* CENTER LINKS */
+.nav-links {
+  display: flex;
+  gap: 50px;
+  list-style: none;
+  font-size: 18px;
+  color: #1f1f1f;
+  cursor: pointer;
+}
+
+/* RIGHT SIDE LOGIN */
+.nav-login {
+  display: flex;
+  align-items: center;
+}
+
+.nav-login-button {
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #1f1f1f;
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+.nav-login-button:hover {
+  opacity: 0.8;
+}

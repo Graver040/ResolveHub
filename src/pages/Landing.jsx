@@ -1,8 +1,8 @@
-import Navbar from "../components/Navbar/Navbar";
-import Hero from "../components/Hero/Hero";
-import Features from "../components/Features/Features";
-import HowItWorks from "../components/HowItWorks/HowItWorks";
-import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Landing/Navbar/Navbar";
+import Hero from "../components/Landing/Hero/Hero";
+import Features from "../components/Landing/Features/Features";
+import HowItWorks from "../components/Landing/HowItWorks/HowItWorks";
+import Footer from "../components/Landing/Footer/Footer";
 
 const Landing = () => {
   return (
